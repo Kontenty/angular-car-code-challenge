@@ -1,4 +1,4 @@
-<form class="p-8">
+<form class="p-8" [formGroup]="carForm">
   <h2 class="text-xl font-bold text-blue-500">Voertuiginformatie opzoeken</h2>
 
   <!-- SELECT VEHICLE TYPE-->
@@ -9,10 +9,12 @@
     <select
       class="block w-full mt-1 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
       name="vehicle-type"
+      formControlName="type"
+      (change)="handleVehicleChange()"
     >
-      <option>Auto</option>
-      <option>Motor</option>
-      <option>Scooter</option>
+      <option ngValue="auto">Auto</option>
+      <option ngValue="motor">Motor</option>
+      <option ngValue="scooter">Scooter</option>
     </select>
   </label>
 
@@ -22,14 +24,11 @@
     <select
       class="block w-full mt-1 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
       name="vehicle-subtype"
+      formControlName="subType"
     >
-      <option>Hatchback</option>
-      <option>Sedan</option>
-      <option>Station</option>
-      <option>Cabriolet</option>
-      <option>Coupé</option>
-      <option>MPV</option>
-      <option>Terreinauto</option>
+      <option *ngFor="let type of getSubTypeOptions()" [ngValue]="type.id">
+        {{ type.name }}
+      </option>
     </select>
   </label>
 
@@ -43,6 +42,7 @@
       class="mt-1 block w-full rounded-md bg-yellow-400 border-red-400 focus:border-gray-500 focus:bg-yellow-300 focus:ring-0"
       name="kenteken"
       placeholder="Bijvoorbeeld AA-BB-12"
+      formControlName="licensePlate"
     />
     <div
       class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2"
