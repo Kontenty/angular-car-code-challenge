@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+
+import { kentekenValidator } from '@car-catalogue/tools/validator';
 
 @Component({
   selector: 'app-car-form',
@@ -8,9 +10,9 @@ import { FormBuilder } from '@angular/forms';
 })
 export class CarFormComponent {
   carForm = this.formBuilder.group({
-    type: '',
+    type: ['', Validators.required],
     subType: '',
-    licensePlate: '',
+    licensePlate: ['', [Validators.required, kentekenValidator()]],
   });
 
   carOptions = [
