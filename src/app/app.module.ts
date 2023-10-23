@@ -3,16 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
+import { CarCatalogueModule } from '@car-catalogue/car-catalogue.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    StoreModule.forRoot({}, {})
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, CarCatalogueModule, StoreModule.forRoot({}, {})],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
