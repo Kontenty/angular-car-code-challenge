@@ -1,3 +1,9 @@
 <picture>
-  <img src="./assets/auto.jpg" alt="auto" class="object-cover h-full w-full" />
+  <ng-container *ngIf="carType$ | async as type">
+    <img
+      [src]="imageDict[type]"
+      alt="vehicle"
+      class="object-cover h-full w-full"
+    />
+  </ng-container>
 </picture>

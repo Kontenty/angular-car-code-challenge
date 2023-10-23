@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { kentekenValidator } from '@car-catalogue/tools/validator';
+import { setCarType } from '@car-catalogue/store/car-catalogue.actions';
 
 @Component({
   selector: 'app-car-form',
@@ -9,7 +11,7 @@ import { kentekenValidator } from '@car-catalogue/tools/validator';
   styleUrls: ['./car-form.component.css'],
 })
 export class CarFormComponent {
-  carForm = this.formBuilder.group({
+  carForm = this.formBuilder.nonNullable.group({
     type: ['', Validators.required],
     subType: '',
     licensePlate: ['', [Validators.required, kentekenValidator()]],
@@ -35,7 +37,7 @@ export class CarFormComponent {
     { id: 'zijspan', name: 'Zijspan' },
   ];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private store: Store) {}
 
   getSubTypeOptions() {
     const subTypeOptions: Record<string, { id: string; name: string }[]> = {
@@ -50,5 +52,6 @@ export class CarFormComponent {
 
   handleVehicleChange() {
     this.carForm.patchValue({ subType: '' });
+    this.store.dispatch(setCarType({ carType: this.carForm.value.type ?? '' }));
   }
 }
