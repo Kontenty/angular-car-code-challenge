@@ -18,7 +18,8 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
-      "@car-catalogue/*": ["./src/app/car-catalogue/*"]
+      "@car-catalogue/*": ["./src/app/car-catalogue/*"],
+      "@shared/*": ["./src/app/shared/*"]
     }
   },
   "angularCompilerOptions": {

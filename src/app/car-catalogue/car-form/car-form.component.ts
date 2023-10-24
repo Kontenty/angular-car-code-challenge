@@ -12,9 +12,15 @@ import { setCarType } from '@car-catalogue/store/car-catalogue.actions';
 })
 export class CarFormComponent {
   carForm = this.formBuilder.nonNullable.group({
-    type: ['', Validators.required],
+    type: '',
     subType: '',
-    licensePlate: ['', [Validators.required, kentekenValidator()]],
+    licensePlate: [
+      '',
+      {
+        validators: [Validators.required, kentekenValidator()],
+        updateOn: 'blur',
+      },
+    ],
   });
 
   carOptions = [
@@ -53,5 +59,10 @@ export class CarFormComponent {
   handleVehicleChange() {
     this.carForm.patchValue({ subType: '' });
     this.store.dispatch(setCarType({ carType: this.carForm.value.type ?? '' }));
+  }
+
+  hasError(ctrlName: string, errorName: string) {
+    const control = this.carForm.get(ctrlName);
+    return control?.invalid && control.errors?.[errorName] !== undefined;
   }
 }

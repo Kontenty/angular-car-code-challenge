@@ -7,6 +7,7 @@ import { CarCatalogueComponent } from './car-catalogue/car-catalogue.component';
 import { CarFormComponent } from './car-form/car-form.component';
 import { CarDisplayComponent } from './car-display/car-display.component';
 import { carsCatalogueFeature } from './store/car-catalogoue.reducer';
+import { UiModule } from '@shared/ui/ui.module';
 
 @NgModule({
   declarations: [CarCatalogueComponent, CarFormComponent, CarDisplayComponent],
@@ -14,6 +15,7 @@ import { carsCatalogueFeature } from './store/car-catalogoue.reducer';
     CommonModule,
     ReactiveFormsModule,
     StoreModule.forFeature(carsCatalogueFeature),
+    UiModule,
   ],
   exports: [CarCatalogueComponent],
 })
